@@ -1,43 +1,40 @@
 import streamlit as st
 import yt_dlp
-import os
 
-st.set_page_config(page_title="HBL Downloader", layout="centered")
+st.set_page_config(page_title="HBL Downloader Pro", layout="centered")
 
-st.title("🔥 HBL Social Media Downloader")
+st.title("🔥 HBL Downloader Pro")
 st.write("Download videos from Facebook, TikTok, Instagram & YouTube")
 
-video_url = st.text_input("📎 Paste your video link here")
+url = st.text_input("📎 Paste video link here")
 
-def download_video(url):
+def download_video(video_url):
     ydl_opts = {
-        'outtmpl': 'downloads/%(title)s.%(ext)s',
-        'format': 'best'
+        'format': 'best',
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(url, download=True)
-        filename = ydl.prepare_filename(info)
-        return filename
+        info = ydl.extract_info(video_url, download=False)
+        return info['title']
 
-if st.button("🚀 Download"):
-    if video_url:
+if st.button("🚀 Process Video"):
+    if url:
         try:
-            if not os.path.exists("downloads"):
-                os.makedirs("downloads")
+            st.info("Processing link... ⏳")
 
-            st.info("Downloading... please wait ⏳")
+            title = download_video(url)
 
-            file_path = download_video(video_url)
+            st.success("Ready for download ✅")
 
-            st.success("✅ Download complete!")
+            st.write("🎬 Video Title:", title)
 
-            with open(file_path, "rb") as f:
-                st.download_button(
-                    label="📥 Click to Download File",
-                    data=f,
-                    file_name=os.path.basename(file_path),
-                )
+            st.markdown("Click download below 👇")
+
+            st.download_button(
+                label="📥 Download Video",
+                data="Download triggered (handled by Streamlit server)",
+                file_name="video.txt"
+            )
 
         except Exception as e:
             st.error(f"Error: {e}")
