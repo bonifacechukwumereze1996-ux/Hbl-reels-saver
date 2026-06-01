@@ -1,40 +1,52 @@
 import streamlit as st
 import yt_dlp
+import os
 
-st.set_page_config(page_title="HBL reals saver Pro", layout="centered")
+st.set_page_config(page_title="HBL Reels Saver", layout="centered")
 
-st.title("🔥 HBL reals saver Pro")
-st.write("Download videos from Facebook, TikTok, Instagram & YouTube")
+st.title("🔥 HBL Reels Saver")
+st.write("Download Facebook & Instagram Reels easily")
 
-url = st.text_input("📎 Paste video link here")
+url = st.text_input("📎 Paste Facebook or Instagram Reel link here")
 
-def download_video(video_url):
+# ✅ Restrict to only supported platforms
+if url:
+    if "facebook.com" not in url and "instagram.com" not in url:
+        st.error("❌ Only Facebook and Instagram Reels are supported")
+        st.stop()
+
+DOWNLOAD_FOLDER = "downloads"
+
+def download_reel(video_url):
+    if not os.path.exists(DOWNLOAD_FOLDER):
+        os.makedirs(DOWNLOAD_FOLDER)
+
     ydl_opts = {
-        'format': 'best',
+        "format": "best",
+        "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+        "quiet": True
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(video_url, download=False)
-        return info['title']
+        info = ydl.extract_info(video_url, download=True)
+        file_path = ydl.prepare_filename(info)
+        return file_path
 
-if st.button("🚀 Process Video"):
+if st.button("🚀 Download Reel"):
     if url:
         try:
-            st.info("Processing link... ⏳")
+            st.info("Processing reel... ⏳")
 
-            title = download_video(url)
+            file_path = download_reel(url)
 
-            st.success("Ready for download ✅")
+            st.success("Download complete ✅")
 
-            st.write("🎬 Video Title:", title)
-
-            st.markdown("Click download below 👇")
-
-            st.download_button(
-                label="📥 Download Video",
-                data="Download triggered (handled by Streamlit server)",
-                file_name="video.txt"
-            )
+            with open(file_path, "rb") as f:
+                st.download_button(
+                    label="📥 Save to Phone",
+                    data=f,
+                    file_name=os.path.basename(file_path),
+                )
 
         except Exception as e:
             st.error(f"Error: {e}")
