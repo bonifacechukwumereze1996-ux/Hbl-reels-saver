@@ -1,8 +1,9 @@
 import streamlit as st
 import yt_dlp
 import os
+import time
 
-st.set_page_config(page_title="HBL Reels Saver", layout="centered")
+st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
 
 DOWNLOAD_FOLDER = "downloads"
 
@@ -15,20 +16,17 @@ if "step" not in st.session_state:
 if "url" not in st.session_state:
     st.session_state.url = ""
 
-if "info" not in st.session_state:
-    st.session_state.info = None
-
 # -----------------------------
-# PAGE 1 - INPUT LINK
+# PAGE 1 - INPUT
 # -----------------------------
 if st.session_state.step == 1:
 
-    st.title("🔥 HBL Reels Saver")
-    st.write("Download Facebook & Instagram Reels")
+    st.title("⚡ HBL Reels Saver (FAST MODE)")
+    st.write("Facebook & Instagram Reels Downloader")
 
-    url = st.text_input("📎 Paste Reel link here")
+    url = st.text_input("📎 Paste Reel link")
 
-    if st.button("Next ➡️"):
+    if st.button("Continue ➡️"):
         if url:
             if "facebook.com" not in url and "instagram.com" not in url:
                 st.error("❌ Only Facebook & Instagram supported")
@@ -37,37 +35,22 @@ if st.session_state.step == 1:
                 st.session_state.step = 2
                 st.rerun()
         else:
-            st.warning("Please enter a link")
+            st.warning("Please paste a link")
 
 # -----------------------------
-# GET VIDEO INFO
+# FAST DOWNLOAD FUNCTION
 # -----------------------------
-def get_video_info(video_url):
-    ydl_opts = {"quiet": True}
+def fast_download(video_url):
 
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        return ydl.extract_info(video_url, download=False)
-
-# -----------------------------
-# DOWNLOAD FUNCTION (FIXED)
-# -----------------------------
-def download_video(video_url, quality):
     if not os.path.exists(DOWNLOAD_FOLDER):
         os.makedirs(DOWNLOAD_FOLDER)
 
-    # ✅ SAFE FORMAT HANDLING (FIX FOR FACEBOOK ERROR)
-    if quality == "low":
-        fmt = "worst[ext=mp4]/worst"
-    elif quality == "hd":
-        fmt = "best[height<=720]/best"
-    else:
-        fmt = "best/bestvideo+bestaudio"
-
     ydl_opts = {
-        "format": fmt,
+        "format": "worst/best",   # ⚡ FAST MODE (no HD delay)
         "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
-        "merge_output_format": "mp4",
-        "quiet": True
+        "quiet": True,
+        "noplaylist": True,
+        "concurrent_fragment_downloads": 1
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -76,44 +59,31 @@ def download_video(video_url, quality):
         return file_path
 
 # -----------------------------
-# PAGE 2 - QUALITY SELECT
+# PAGE 2 - DOWNLOAD
 # -----------------------------
 if st.session_state.step == 2:
 
-    st.title("🎬 Choose Quality")
+    st.title("⚡ Fast Download Mode")
 
-    try:
-        if st.session_state.info is None:
-            st.session_state.info = get_video_info(st.session_state.url)
+    st.info("Processing link... please wait")
 
-        st.success("Video loaded ✅")
-
-        st.write("📌 Title:", st.session_state.info.get("title", "Unknown"))
-
-    except:
-        st.error("Failed to load video info")
+    # platform check
+    if "facebook.com" not in st.session_state.url and "instagram.com" not in st.session_state.url:
+        st.error("Invalid link")
         st.stop()
 
-    quality = st.radio(
-        "Select Quality",
-        ["High Quality", "HD (Recommended)", "Low Quality"]
-    )
-
-    if st.button("🚀 Download Now"):
-
-        if quality == "Low Quality":
-            q = "low"
-        elif quality == "HD (Recommended)":
-            q = "hd"
-        else:
-            q = "best"
-
-        st.info("Downloading... ⏳")
+    if st.button("🚀 Start Fast Download"):
 
         try:
-            file_path = download_video(st.session_state.url, q)
+            start = time.time()
 
-            st.success("Download complete ✅")
+            st.write("⬇️ Downloading...")
+
+            file_path = fast_download(st.session_state.url)
+
+            duration = round(time.time() - start, 2)
+
+            st.success(f"Done in {duration} seconds ✅")
 
             with open(file_path, "rb") as f:
                 st.download_button(
@@ -127,5 +97,3 @@ if st.session_state.step == 2:
 
     if st.button("⬅️ Back"):
         st.session_state.step = 1
-        st.session_state.info = None
-        st.rerun()
