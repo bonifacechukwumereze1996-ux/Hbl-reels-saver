@@ -7,7 +7,7 @@ st.set_page_config(page_title="HBL Reels Saver", layout="centered")
 DOWNLOAD_FOLDER = "downloads"
 
 # -----------------------------
-# SESSION STATE CONTROL
+# SESSION STATE
 # -----------------------------
 if "step" not in st.session_state:
     st.session_state.step = 1
@@ -19,14 +19,14 @@ if "info" not in st.session_state:
     st.session_state.info = None
 
 # -----------------------------
-# PAGE 1 - LINK INPUT
+# PAGE 1 - INPUT LINK
 # -----------------------------
 if st.session_state.step == 1:
 
     st.title("🔥 HBL Reels Saver")
-    st.write("Paste Facebook or Instagram Reel link")
+    st.write("Download Facebook & Instagram Reels")
 
-    url = st.text_input("📎 Enter Reel Link")
+    url = st.text_input("📎 Paste Reel link here")
 
     if st.button("Next ➡️"):
         if url:
@@ -40,32 +40,34 @@ if st.session_state.step == 1:
             st.warning("Please enter a link")
 
 # -----------------------------
-# FUNCTION TO GET VIDEO INFO
+# GET VIDEO INFO
 # -----------------------------
 def get_video_info(video_url):
     ydl_opts = {"quiet": True}
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(video_url, download=False)
-        return info
+        return ydl.extract_info(video_url, download=False)
 
 # -----------------------------
-# DOWNLOAD FUNCTION
+# DOWNLOAD FUNCTION (FIXED)
 # -----------------------------
 def download_video(video_url, quality):
     if not os.path.exists(DOWNLOAD_FOLDER):
         os.makedirs(DOWNLOAD_FOLDER)
 
+    # ✅ SAFE FORMAT HANDLING (FIX FOR FACEBOOK ERROR)
     if quality == "low":
-        fmt = "worst"
+        fmt = "worst[ext=mp4]/worst"
     elif quality == "hd":
-        fmt = "best[height<=720]"
+        fmt = "best[height<=720]/best"
     else:
-        fmt = "best"
+        fmt = "best/bestvideo+bestaudio"
 
     ydl_opts = {
         "format": fmt,
-        "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s"
+        "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
+        "merge_output_format": "mp4",
+        "quiet": True
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -74,19 +76,17 @@ def download_video(video_url, quality):
         return file_path
 
 # -----------------------------
-# PAGE 2 - QUALITY SELECTION
+# PAGE 2 - QUALITY SELECT
 # -----------------------------
 if st.session_state.step == 2:
 
     st.title("🎬 Choose Quality")
 
-    st.write("Your link is ready for download")
-
     try:
         if st.session_state.info is None:
             st.session_state.info = get_video_info(st.session_state.url)
 
-        st.success("Video Loaded ✅")
+        st.success("Video loaded ✅")
 
         st.write("📌 Title:", st.session_state.info.get("title", "Unknown"))
 
