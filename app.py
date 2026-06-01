@@ -1,9 +1,9 @@
 import streamlit as st
 import yt_dlp
 
-st.set_page_config(page_title="HBL Downloader Pro", layout="centered")
+st.set_page_config(page_title="HBL reals saver Pro", layout="centered")
 
-st.title("🔥 HBL Downloader Pro")
+st.title("🔥 HBL reals saver Pro")
 st.write("Download videos from Facebook, TikTok, Instagram & YouTube")
 
 url = st.text_input("📎 Paste video link here")
