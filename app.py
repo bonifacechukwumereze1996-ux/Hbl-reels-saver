@@ -47,18 +47,23 @@ st.markdown("""
     backdrop-filter: blur(10px);
 }
 
-/* Small logo */
-.logo-img {
+/* Logo */
+.logo {
+    display:flex;
+    align-items:center;
+}
+
+.logo img {
     width:32px;
     height:32px;
     border-radius:6px;
 }
 
-/* Brand text */
-.logo-text {
+.logo span {
     font-size:15px;
     font-weight:bold;
     margin-left:8px;
+    color:white;
 }
 
 /* Nav links */
@@ -67,11 +72,11 @@ st.markdown("""
     color:#b0b3b8;
 }
 
-/* Watermark logos */
+/* Watermark */
 .watermark {
     position: fixed;
     opacity: 0.05;
-    width: 100px;
+    width: 90px;
     z-index: -1;
 }
 
@@ -89,7 +94,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# WATERMARK ICONS
+# WATERMARK LOGOS
 # -----------------------------
 st.markdown("""
 <img class="watermark fb" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
@@ -101,9 +106,9 @@ st.markdown("""
 # -----------------------------
 st.markdown("""
 <div class="navbar">
-    <div style="display:flex; align-items:center;">
-        <img src="logo.png" class="logo-img">
-        <div class="logo-text">HBL Saver</div>
+    <div class="logo">
+        <img src="logo.png">
+        <span>HBL Saver</span>
     </div>
 
     <div class="nav-links">
@@ -111,6 +116,12 @@ st.markdown("""
     </div>
 </div>
 """, unsafe_allow_html=True)
+
+# -----------------------------
+# TITLE
+# -----------------------------
+st.title("⚡ HBL Reels Saver")
+st.write("Download Facebook & Instagram Reels in seconds")
 
 # -----------------------------
 # DOWNLOAD FUNCTION
@@ -131,12 +142,6 @@ def fast_download(video_url):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url, download=True)
         return ydl.prepare_filename(info)
-
-# -----------------------------
-# TITLE
-# -----------------------------
-st.title("⚡ HBL Reels Saver")
-st.write("Download Facebook & Instagram Reels in seconds")
 
 # -----------------------------
 # INPUT
@@ -168,8 +173,8 @@ if st.button("🚀 Download Now"):
 
             with open(file_path, "rb") as f:
                 st.download_button(
-                    label="📥 Save to Phone",
-                    data=f,
+                    "📥 Save to Phone",
+                    f,
                     file_name=os.path.basename(file_path)
                 )
 
@@ -177,7 +182,7 @@ if st.button("🚀 Download Now"):
             st.error(f"Error: {e}")
 
 # -----------------------------
-# FEATURES SECTION
+# FEATURES
 # -----------------------------
 st.markdown("---")
 st.markdown("## Why Choose HBL Saver?")
@@ -185,12 +190,14 @@ st.markdown("## Why Choose HBL Saver?")
 col1, col2 = st.columns(2)
 with col1:
     st.success("⚡ Fast Downloads")
+
 with col2:
     st.success("🎬 Reel Support")
 
 col3, col4 = st.columns(2)
 with col3:
     st.success("📱 Mobile Friendly")
+
 with col4:
     st.success("🔒 Secure Processing")
 
