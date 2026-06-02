@@ -15,107 +15,103 @@ st.set_page_config(
 DOWNLOAD_FOLDER = "downloads"
 
 # -----------------------------
-# STYLES (YOUR ORIGINAL LOOK - SAFE)
+# STYLES (PRO SAAS DESIGN)
 # -----------------------------
 st.markdown("""
 <style>
 
-/* Background image */
+/* Background */
 .stApp {
-    background: url("https://images.unsplash.com/photo-1611162617474-5b21e879e113") no-repeat center center fixed;
-    background-size: cover;
+    background: linear-gradient(135deg, #0f1117, #1b1f2a);
     color: white;
 }
 
-/* Dark overlay */
-.stApp::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
+/* Glass card */
+.card {
+    background: rgba(255,255,255,0.06);
+    padding: 22px;
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 18px;
+}
+
+/* Title */
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Subtitle */
+.subtitle {
+    text-align: center;
+    color: #b0b3b8;
+    margin-bottom: 15px;
+}
+
+/* Button */
+.stButton>button {
+    background-color: #1f6feb;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.78);
-    z-index: -1;
+    font-weight: bold;
+    border: none;
 }
 
-/* Navbar */
-.navbar {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:10px 15px;
-    margin-bottom:20px;
-    background: rgba(22, 27, 34, 0.85);
-    border-radius:12px;
-    backdrop-filter: blur(10px);
+.stButton>button:hover {
+    background-color: #2b7fff;
 }
 
-/* Logo */
-.logo {
-    display:flex;
-    align-items:center;
-}
-
-.logo img {
-    width:32px;
-    height:32px;
-    border-radius:6px;
-}
-
-.logo span {
-    font-size:15px;
-    font-weight:bold;
-    margin-left:8px;
-    color:white;
-}
-
-/* Watermark */
-.watermark {
-    position: fixed;
-    opacity: 0.05;
-    width: 90px;
-    z-index: -1;
-}
-
-.fb {
-    top: 18%;
-    left: 8%;
-}
-
-.ig {
-    bottom: 12%;
-    right: 8%;
+/* Feature boxes */
+.feature {
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# WATERMARK LOGOS
+# HERO SECTION
 # -----------------------------
 st.markdown("""
-<img class="watermark fb" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
-<img class="watermark ig" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
-""", unsafe_allow_html=True)
+<div class="card">
 
-# -----------------------------
-# NAVBAR (FIXED - NO LINKS)
-# -----------------------------
-st.markdown("""
-<div class="navbar">
-    <div class="logo">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
-        <span>HBL Saver</span>
-    </div>
+<h1 class="title">⚡ HBL Reels Saver</h1>
+
+<p class="subtitle">
+Download Facebook & Instagram Reels in seconds
+</p>
+
+<img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868"
+style="width:100%; border-radius:14px; margin-top:10px;">
+
 </div>
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# TITLE
+# FEATURES
 # -----------------------------
-st.title("⚡ HBL Reels Saver")
-st.write("Download Facebook & Instagram Reels in seconds")
+st.markdown("### Why Choose HBL Saver?")
+
+f1, f2 = st.columns(2)
+with f1:
+    st.markdown('<div class="feature">⚡ Fast Downloads</div>', unsafe_allow_html=True)
+with f2:
+    st.markdown('<div class="feature">🎬 Reel Support</div>', unsafe_allow_html=True)
+
+f3, f4 = st.columns(2)
+with f3:
+    st.markdown('<div class="feature">📱 Mobile Friendly</div>', unsafe_allow_html=True)
+with f4:
+    st.markdown('<div class="feature">🔒 Safe Processing</div>', unsafe_allow_html=True)
+
+st.markdown("---")
 
 # -----------------------------
 # DOWNLOAD FUNCTION
@@ -137,7 +133,7 @@ def fast_download(video_url):
         return ydl.prepare_filename(info)
 
 # -----------------------------
-# INPUT
+# INPUT SECTION
 # -----------------------------
 url = st.text_input("📎 Paste Facebook or Instagram Reel Link")
 
@@ -147,7 +143,7 @@ url = st.text_input("📎 Paste Facebook or Instagram Reel Link")
 if st.button("🚀 Download Now"):
 
     if not url:
-        st.warning("Please paste a link")
+        st.warning("Please paste a link first")
 
     elif "facebook.com" not in url and "instagram.com" not in url:
         st.error("❌ Only Facebook & Instagram links allowed")
@@ -156,46 +152,25 @@ if st.button("🚀 Download Now"):
         try:
             start = time.time()
 
-            st.info("Downloading... please wait ⏳")
-
-            file_path = fast_download(url)
+            with st.spinner("Downloading video... please wait ⏳"):
+                file_path = fast_download(url)
 
             duration = round(time.time() - start, 2)
 
-            st.success(f"Done in {duration} seconds ✅")
+            st.success(f"Download completed in {duration} seconds ✅")
 
             with open(file_path, "rb") as f:
                 st.download_button(
-                    "📥 Save to Phone",
+                    "📥 Save to Device",
                     f,
                     file_name=os.path.basename(file_path)
                 )
 
         except Exception as e:
-            st.error(f"Error: {e}")
-
-# -----------------------------
-# FEATURES
-# -----------------------------
-st.markdown("---")
-st.markdown("## Why Choose HBL Saver?")
-
-col1, col2 = st.columns(2)
-with col1:
-    st.success("⚡ Fast Downloads")
-
-with col2:
-    st.success("🎬 Reel Support")
-
-col3, col4 = st.columns(2)
-with col3:
-    st.success("📱 Mobile Friendly")
-
-with col4:
-    st.success("🔒 Secure Processing")
+            st.error(f"Something went wrong: {e}")
 
 # -----------------------------
 # FOOTER
 # -----------------------------
 st.markdown("---")
-st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
+st.caption("© 2026 HBL Reels Saver | Built for fast mobile downloads")
