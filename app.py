@@ -44,7 +44,7 @@ st.markdown("""
 # -----------------------------
 # HEADER
 # -----------------------------
-st.image("logo.png",align=center, width=80)
+st.image("logo.png", width=80)
 
 st.markdown("""
 <div class="navbar">
