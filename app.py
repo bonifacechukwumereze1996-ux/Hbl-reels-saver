@@ -4,18 +4,14 @@ import os
 import time
 
 # -----------------------------
-# PAGE CONFIG
+# PAGE CONFIG (MUST BE FIRST)
 # -----------------------------
-st.set_page_config(
-    page_title="HBL Reels Saver",
-    page_icon="⚡",
-    layout="centered"
-)
+st.set_page_config(page_title="HBL Reels Saver", layout="centered")
 
 DOWNLOAD_FOLDER = "downloads"
 
 # -----------------------------
-# STYLES (YOUR ORIGINAL GLASS UI)
+# STYLES
 # -----------------------------
 st.markdown("""
 <style>
@@ -70,6 +66,19 @@ st.markdown("""
     color:white;
 }
 
+/* Nav links */
+.nav-links a {
+    font-size:12px;
+    color:#b0b3b8;
+    text-decoration:none;
+    margin-left:10px;
+}
+
+.nav-links a:hover {
+    color:white;
+    transition:0.3s;
+}
+
 /* Watermark */
 .watermark {
     position: fixed;
@@ -100,13 +109,20 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# NAVBAR (UNCHANGED)
+# NAVBAR (FIXED)
 # -----------------------------
 st.markdown("""
 <div class="navbar">
     <div class="logo">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
         <span>HBL Saver</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -116,14 +132,6 @@ st.markdown("""
 # -----------------------------
 st.title("⚡ HBL Reels Saver")
 st.write("Download Facebook & Instagram Reels in seconds")
-
-# -----------------------------
-# HERO IMAGE (ONLY CHANGE)
-# -----------------------------
-st.image(
-    "https://images.unsplash.com/photo-1520975922284-7a7a8f1f9b5f",
-    use_container_width=True
-)
 
 # -----------------------------
 # DOWNLOAD FUNCTION
@@ -147,7 +155,7 @@ def fast_download(video_url):
 # -----------------------------
 # INPUT
 # -----------------------------
-url = st.text_input("📎 Paste Facebook or Instagram Reel Link")
+url = st.text_input("📎 Paste Reel Link")
 
 # -----------------------------
 # DOWNLOAD BUTTON
@@ -189,3 +197,21 @@ st.markdown("---")
 st.markdown("## Why Choose HBL Saver?")
 
 col1, col2 = st.columns(2)
+with col1:
+    st.success("⚡ Fast Downloads")
+
+with col2:
+    st.success("🎬 Reel Support")
+
+col3, col4 = st.columns(2)
+with col3:
+    st.success("📱 Mobile Friendly")
+
+with col4:
+    st.success("🔒 Secure Processing")
+
+# -----------------------------
+# FOOTER
+# -----------------------------
+st.markdown("---")
+st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
