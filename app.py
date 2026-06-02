@@ -139,11 +139,18 @@ if st.session_state.step == 2:
             st.success(f"Done in {duration} seconds ✅")
 
             with open(file_path, "rb") as f:
-                st.download_button(
-                    label="📥 Save to Phone",
-                    data=f,
-                    file_name=os.path.basename(file_path),
-                )
+    file_bytes = f.read()
+
+st.download_button(
+    "📥 Save to Phone",
+    data=file_bytes,
+    file_name=os.path.basename(file_path),
+    mime="video/mp4"
+)
+
+# Delete temporary file from server
+if os.path.exists(file_path):
+    os.remove(file_path)
 
         except Exception as e:
             st.error(f"Error: {e}")
