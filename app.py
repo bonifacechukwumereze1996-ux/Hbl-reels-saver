@@ -67,9 +67,16 @@ st.markdown("""
 }
 
 /* Nav links */
-.nav-links {
+.nav-links a {
     font-size:12px;
     color:#b0b3b8;
+    text-decoration:none;
+    margin-left:10px;
+}
+
+.nav-links a:hover {
+    color:white;
+    transition:0.3s;
 }
 
 /* Watermark */
@@ -102,17 +109,20 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# NAVBAR
+# NAVBAR (FIXED)
 # -----------------------------
 st.markdown("""
 <div class="navbar">
     <div class="logo">
-        <img src="logo.png">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
         <span>HBL Saver</span>
     </div>
 
     <div class="nav-links">
-        Home | Features | About | Contact
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -132,11 +142,10 @@ def fast_download(video_url):
         os.makedirs(DOWNLOAD_FOLDER)
 
     ydl_opts = {
-        "format": "worst/best",
+        "format": "best",
         "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
         "quiet": True,
         "noplaylist": True,
-        "concurrent_fragment_downloads": 1
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -163,7 +172,7 @@ if st.button("🚀 Download Now"):
         try:
             start = time.time()
 
-            st.info("Downloading... please wait")
+            st.info("Downloading... please wait ⏳")
 
             file_path = fast_download(url)
 
