@@ -64,12 +64,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
-st.image("logo.png", width=150)
-menu = st.radio(
-    "",
-    ["🏠 Home", "⭐ Features", "ℹ️ About", "📞 Contact"],
-    horizontal=True
-)
+st.image("logo.png", width=100)
+st.markdown("""
+<div class="navbar">
+    <div class="logo-text">🔥 HBL Reels Saver</div>
+    <div>Home | Features | About | Contact</div>
+</div>
+""", unsafe_allow_html=True)
 
 DOWNLOAD_FOLDER = "downloads"
 
