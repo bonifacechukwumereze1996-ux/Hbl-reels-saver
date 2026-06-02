@@ -23,14 +23,14 @@ st.markdown("""
 
 /* Title */
 .hero-title {
-    font-size: 42px;
+    font-size: 40px;
     font-weight: bold;
-    color: white;
+    color: Gold;
 }
 
 /* Subtitle */
 .hero-subtitle {
-    font-size: 18px;
+    font-size: 16px;
     color: #b0b3b8;
 }
 
@@ -55,7 +55,7 @@ st.markdown("""
 }
 
 .logo-text {
-    font-size:24px;
+    font-size:20px;
     font-weight:bold;
     color:white;
 }
