@@ -4,9 +4,11 @@ import os
 import time
 
 # -----------------------------
-# MUST BE FIRST STREAMLIT COMMAND
+# PAGE CONFIG (MUST BE FIRST)
 # -----------------------------
-st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
+st.set_page_config(page_title="HBL Reels Saver", layout="centered")
+
+DOWNLOAD_FOLDER = "downloads"
 
 # -----------------------------
 # STYLES
@@ -14,10 +16,23 @@ st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
 st.markdown("""
 <style>
 
-/* Main background */
+/* Background image */
 .stApp {
-    background-color: #0f1117;
+    background: url("https://images.unsplash.com/photo-1611162617474-5b21e879e113") no-repeat center center fixed;
+    background-size: cover;
     color: white;
+}
+
+/* Dark overlay */
+.stApp::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.78);
+    z-index: -1;
 }
 
 /* Navbar */
@@ -25,46 +40,80 @@ st.markdown("""
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px;
+    padding:10px 15px;
     margin-bottom:20px;
-    background:#161b22;
-    border-radius:15px;
+    background: rgba(22, 27, 34, 0.85);
+    border-radius:12px;
+    backdrop-filter: blur(10px);
 }
 
+/* Small logo */
+.logo-img {
+    width:32px;
+    height:32px;
+    border-radius:6px;
+}
+
+/* Brand text */
 .logo-text {
-    font-size:20px;
+    font-size:15px;
     font-weight:bold;
-    color:white;
+    margin-left:8px;
+}
+
+/* Nav links */
+.nav-links {
+    font-size:12px;
+    color:#b0b3b8;
+}
+
+/* Watermark logos */
+.watermark {
+    position: fixed;
+    opacity: 0.05;
+    width: 100px;
+    z-index: -1;
+}
+
+.fb {
+    top: 18%;
+    left: 8%;
+}
+
+.ig {
+    bottom: 12%;
+    right: 8%;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # -----------------------------
-# HEADER
+# WATERMARK ICONS
 # -----------------------------
-st.image("logo.png", width=100)
+st.markdown("""
+<img class="watermark fb" src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg">
+<img class="watermark ig" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png">
+""", unsafe_allow_html=True)
 
+# -----------------------------
+# NAVBAR
+# -----------------------------
 st.markdown("""
 <div class="navbar">
-    <div class="logo-text">🔥 HBL Reels Saver</div>
-    <div>Home | Features | About | Contact</div>
+    <div style="display:flex; align-items:center;">
+        <img src="logo.png" class="logo-img">
+        <div class="logo-text">HBL Saver</div>
+    </div>
+
+    <div class="nav-links">
+        Home | Features | About | Contact
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-DOWNLOAD_FOLDER = "downloads"
-
 # -----------------------------
-# SESSION STATE
-# -----------------------------
-if "step" not in st.session_state:
-    st.session_state.step = 1
-
-if "url" not in st.session_state:
-    st.session_state.url = ""
-
-# -----------------------------
-# FAST DOWNLOAD FUNCTION
+# DOWNLOAD FUNCTION
 # -----------------------------
 def fast_download(video_url):
 
@@ -81,46 +130,37 @@ def fast_download(video_url):
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url, download=True)
-        file_path = ydl.prepare_filename(info)
-        return file_path
+        return ydl.prepare_filename(info)
 
 # -----------------------------
-# PAGE 1 - INPUT
+# TITLE
 # -----------------------------
-if st.session_state.step == 1:
-
-    st.title("⚡ HBL Reels Saver (FAST MODE)")
-    st.write("Facebook & Instagram Reels Downloader")
-
-    url = st.text_input("📎 Paste Reel link")
-
-    if st.button("Continue ➡️"):
-
-        if not url:
-            st.warning("Please paste a link")
-
-        elif "facebook.com" not in url and "instagram.com" not in url:
-            st.error("❌ Only Facebook & Instagram supported")
-
-        else:
-            st.session_state.url = url
-            st.session_state.step = 2
-            st.rerun()
+st.title("⚡ HBL Reels Saver")
+st.write("Download Facebook & Instagram Reels in seconds")
 
 # -----------------------------
-# PAGE 2 - DOWNLOAD
+# INPUT
 # -----------------------------
-if st.session_state.step == 2:
+url = st.text_input("📎 Paste Reel Link")
 
-    st.title("⚡ Fast Download Mode")
-    st.info("Processing link... please wait")
+# -----------------------------
+# DOWNLOAD BUTTON
+# -----------------------------
+if st.button("🚀 Download Now"):
 
-    if st.button("🚀 Start Fast Download"):
+    if not url:
+        st.warning("Please paste a link")
 
+    elif "facebook.com" not in url and "instagram.com" not in url:
+        st.error("❌ Only Facebook & Instagram links allowed")
+
+    else:
         try:
             start = time.time()
 
-            file_path = fast_download(st.session_state.url)
+            st.info("Downloading... please wait")
+
+            file_path = fast_download(url)
 
             duration = round(time.time() - start, 2)
 
@@ -130,43 +170,32 @@ if st.session_state.step == 2:
                 st.download_button(
                     label="📥 Save to Phone",
                     data=f,
-                    file_name=os.path.basename(file_path),
+                    file_name=os.path.basename(file_path)
                 )
 
         except Exception as e:
             st.error(f"Error: {e}")
 
-    if st.button("⬅️ Back"):
-        st.session_state.step = 1
-
 # -----------------------------
-# FOOTER
+# FEATURES SECTION
 # -----------------------------
-st.markdown("""
-## Download Facebook & Instagram Reels
-
-Fast, simple and mobile-friendly reel downloader.
-
-Save videos directly to your phone in seconds.
-""")
-
-st.markdown("## Why Choose HBL Reels Saver?")
+st.markdown("---")
+st.markdown("## Why Choose HBL Saver?")
 
 col1, col2 = st.columns(2)
-
 with col1:
     st.success("⚡ Fast Downloads")
-
 with col2:
     st.success("🎬 Reel Support")
 
 col3, col4 = st.columns(2)
-
 with col3:
     st.success("📱 Mobile Friendly")
-
 with col4:
     st.success("🔒 Secure Processing")
 
+# -----------------------------
+# FOOTER
+# -----------------------------
 st.markdown("---")
 st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
