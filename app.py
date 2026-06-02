@@ -17,6 +17,23 @@ Fast, simple and mobile-friendly reel downloader.
 
 Paste your reel link below and save it to your device in seconds.
 """)
+st.markdown("## Why Choose HBL Reels Saver?")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.success("⚡ Fast Downloads")
+
+with col2:
+    st.success("🎬 Reel Support")
+
+col3, col4 = st.columns(2)
+
+with col3:
+    st.success("📱 Mobile Friendly")
+
+with col4:
+    st.success("🔒 Secure Processing")
 
 st.markdown("""
 # 🔥 HBL Reels Saver
