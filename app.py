@@ -82,6 +82,17 @@ if "step" not in st.session_state:
 
 if "url" not in st.session_state:
     st.session_state.url = ""
+st.markdown("""
+<div class="hero">
+    <div class="hero-title">
+        Save Facebook & Instagram Reels
+    </div>
+
+    <div class="hero-subtitle">
+        Fast, secure and mobile-friendly downloads.
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 # -----------------------------
 # PAGE 1 - INPUT
