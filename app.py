@@ -10,6 +10,13 @@ menu = st.radio(
     ["🏠 Home", "⭐ Features", "ℹ️ About", "📞 Contact"],
     horizontal=True
 )
+st.markdown("""
+## Download Facebook & Instagram Reels
+
+Fast, simple and mobile-friendly reel downloader.
+
+Paste your reel link below and save it to your device in seconds.
+""")
 
 st.markdown("""
 # 🔥 HBL Reels Saver
