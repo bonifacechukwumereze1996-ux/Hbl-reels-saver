@@ -37,6 +37,17 @@ st.markdown("""
     font-weight:bold;
     color:white;
 }
+/* Text input box */
+.stTextInput input {
+    background-color: white !important;
+    color: white !important;
+}
+
+/* Placeholder text */
+.stTextInput input::placeholder {
+    color: black !important;
+    opacity: 1 !important;
+}
 
 </style>
 """, unsafe_allow_html=True)
