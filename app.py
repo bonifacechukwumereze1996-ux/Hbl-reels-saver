@@ -4,6 +4,12 @@ import os
 import time
 
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
+st.image("logo.png", width=150)
+
+st.markdown("""
+# 🔥 HBL Reels Saver
+### Save Facebook & Instagram Reels in Seconds
+""")
 
 DOWNLOAD_FOLDER = "downloads"
 
