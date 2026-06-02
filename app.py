@@ -16,7 +16,8 @@ st.markdown("""
 
 /* Main background */
 .stApp {
-    background-color: #0f1117;
+    background: url("https://images.unsplash.com/photo-1611162617474-5b21e879e113") no-repeat center center fixed;
+    background-size: cover;
     color: white;
 }
 
