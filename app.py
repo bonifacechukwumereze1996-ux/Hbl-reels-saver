@@ -26,10 +26,10 @@ st.markdown("""
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:10px;
+    padding:8px;
     margin-bottom:15px;
     background:#161b22;
-    border-radius:15px;
+    border-radius:10px;
 }
 
 .logo-text {
