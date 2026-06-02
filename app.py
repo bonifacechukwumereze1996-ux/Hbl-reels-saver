@@ -188,4 +188,4 @@ if st.button("🚀 Download Now"):
 st.markdown("---")
 st.markdown("## Why Choose HBL Saver?")
 
-col1, col2 = st.columns(2
+col1, col2 = st.columns(2)
