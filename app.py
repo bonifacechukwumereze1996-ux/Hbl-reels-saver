@@ -2,6 +2,66 @@ import streamlit as st
 import yt_dlp
 import os
 import time
+st.markdown("""
+<style>
+
+/* Main background */
+.stApp {
+    background-color: #0f1117;
+    color: white;
+}
+
+/* Hero card */
+.hero {
+    background: #161b22;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #30363d;
+}
+
+/* Title */
+.hero-title {
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Subtitle */
+.hero-subtitle {
+    font-size: 18px;
+    color: #b0b3b8;
+}
+
+/* Feature cards */
+.feature-card {
+    background: #161b22;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #30363d;
+}
+
+/* Navbar */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    margin-bottom:20px;
+    background:#161b22;
+    border-radius:15px;
+}
+
+.logo-text {
+    font-size:24px;
+    font-weight:bold;
+    color:white;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
 st.image("logo.png", width=150)
