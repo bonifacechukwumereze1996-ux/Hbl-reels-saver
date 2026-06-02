@@ -132,3 +132,5 @@ if st.session_state.step == 2:
 
     if st.button("⬅️ Back"):
         st.session_state.step = 1
+st.markdown("---")
+st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
