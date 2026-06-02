@@ -10,32 +10,6 @@ menu = st.radio(
     ["🏠 Home", "⭐ Features", "ℹ️ About", "📞 Contact"],
     horizontal=True
 )
-st.markdown("""
-## Download Facebook & Instagram Reels
-
-Fast, simple and mobile-friendly reel downloader.
-
-Paste your reel link below and save it to your device in seconds.
-""")
-st.markdown("## Why Choose HBL Reels Saver?")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.success("⚡ Fast Downloads")
-
-with col2:
-    st.success("🎬 Reel Support")
-
-col3, col4 = st.columns(2)
-
-with col3:
-    st.success("📱 Mobile Friendly")
-
-with col4:
-    st.success("🔒 Secure Processing")
-
-
 
 DOWNLOAD_FOLDER = "downloads"
 
@@ -129,5 +103,30 @@ if st.session_state.step == 2:
 
     if st.button("⬅️ Back"):
         st.session_state.step = 1
+st.markdown("""
+## Download Facebook & Instagram Reels
+
+Fast, simple and mobile-friendly reel downloader.
+
+Paste your reel link below and save it to your device in seconds.
+""")
+st.markdown("## Why Choose HBL Reels Saver?")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.success("⚡ Fast Downloads")
+
+with col2:
+    st.success("🎬 Reel Support")
+
+col3, col4 = st.columns(2)
+
+with col3:
+    st.success("📱 Mobile Friendly")
+
+with col4:
+    st.success("🔒 Secure Processing")
+
 st.markdown("---")
 st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
