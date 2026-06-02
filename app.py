@@ -40,7 +40,7 @@ st.markdown("""
 /* Text input box */
 .stTextInput input {
     background-color: white !important;
-    color: white !important;
+    color: black !important;
 }
 
 /* Placeholder text */
