@@ -5,6 +5,11 @@ import time
 
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
 st.image("logo.png", width=150)
+menu = st.radio(
+    "",
+    ["🏠 Home", "⭐ Features", "ℹ️ About", "📞 Contact"],
+    horizontal=True
+)
 
 st.markdown("""
 # 🔥 HBL Reels Saver
