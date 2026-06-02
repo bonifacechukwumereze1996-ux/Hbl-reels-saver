@@ -2,6 +2,15 @@ import streamlit as st
 import yt_dlp
 import os
 import time
+
+# -----------------------------
+# MUST BE FIRST STREAMLIT COMMAND
+# -----------------------------
+st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
+
+# -----------------------------
+# STYLES
+# -----------------------------
 st.markdown("""
 <style>
 
@@ -9,38 +18,6 @@ st.markdown("""
 .stApp {
     background-color: #0f1117;
     color: white;
-}
-
-/* Hero card */
-.hero {
-    background: #161b22;
-    padding: 30px;
-    border-radius: 20px;
-    text-align: right;
-    margin-bottom: 25px;
-    border: 1px solid #30363d;
-}
-
-/* Title */
-.hero-title {
-    font-size: 40px;
-    font-weight: bold;
-    color: Gold;
-}
-
-/* Subtitle */
-.hero-subtitle {
-    font-size: 16px;
-    color: #b0b3b8;
-}
-
-/* Feature cards */
-.feature-card {
-    background: #161b22;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #30363d;
 }
 
 /* Navbar */
@@ -63,14 +40,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
+# -----------------------------
+# HEADER
+# -----------------------------
 st.image("logo.png", width=100)
+
 st.markdown("""
 <div class="navbar">
     <div class="logo-text">🔥 HBL Reels Saver</div>
     <div>Home | Features | About | Contact</div>
 </div>
-"""
+""", unsafe_allow_html=True)
 
 DOWNLOAD_FOLDER = "downloads"
 
@@ -84,27 +64,6 @@ if "url" not in st.session_state:
     st.session_state.url = ""
 
 # -----------------------------
-# PAGE 1 - INPUT
-# -----------------------------
-if st.session_state.step == 1:
-
-    st.title("⚡ HBL Reels Saver (FAST MODE)")
-    st.write("Facebook & Instagram Reels Downloader")
-
-    url = st.text_input("📎 Paste Reel link")
-
-    if st.button("Continue ➡️"):
-        if url:
-            if "facebook.com" not in url and "instagram.com" not in url:
-                st.error("❌ Only Facebook & Instagram supported")
-            else:
-                st.session_state.url = url
-                st.session_state.step = 2
-                st.rerun()
-        else:
-            st.warning("Please paste a link")
-
-# -----------------------------
 # FAST DOWNLOAD FUNCTION
 # -----------------------------
 def fast_download(video_url):
@@ -113,7 +72,7 @@ def fast_download(video_url):
         os.makedirs(DOWNLOAD_FOLDER)
 
     ydl_opts = {
-        "format": "worst/best",   # ⚡ FAST MODE (no HD delay)
+        "format": "worst/best",
         "outtmpl": f"{DOWNLOAD_FOLDER}/%(title)s.%(ext)s",
         "quiet": True,
         "noplaylist": True,
@@ -126,25 +85,40 @@ def fast_download(video_url):
         return file_path
 
 # -----------------------------
+# PAGE 1 - INPUT
+# -----------------------------
+if st.session_state.step == 1:
+
+    st.title("⚡ HBL Reels Saver (FAST MODE)")
+    st.write("Facebook & Instagram Reels Downloader")
+
+    url = st.text_input("📎 Paste Reel link")
+
+    if st.button("Continue ➡️"):
+
+        if not url:
+            st.warning("Please paste a link")
+
+        elif "facebook.com" not in url and "instagram.com" not in url:
+            st.error("❌ Only Facebook & Instagram supported")
+
+        else:
+            st.session_state.url = url
+            st.session_state.step = 2
+            st.rerun()
+
+# -----------------------------
 # PAGE 2 - DOWNLOAD
 # -----------------------------
 if st.session_state.step == 2:
 
     st.title("⚡ Fast Download Mode")
-
     st.info("Processing link... please wait")
-
-    # platform check
-    if "facebook.com" not in st.session_state.url and "instagram.com" not in st.session_state.url:
-        st.error("Invalid link")
-        st.stop()
 
     if st.button("🚀 Start Fast Download"):
 
         try:
             start = time.time()
-
-            st.write("⬇️ Downloading...")
 
             file_path = fast_download(st.session_state.url)
 
@@ -164,13 +138,18 @@ if st.session_state.step == 2:
 
     if st.button("⬅️ Back"):
         st.session_state.step = 1
+
+# -----------------------------
+# FOOTER
+# -----------------------------
 st.markdown("""
 ## Download Facebook & Instagram Reels
 
 Fast, simple and mobile-friendly reel downloader.
 
-Paste your reel link below and save it to your device in seconds.
+Save videos directly to your phone in seconds.
 """)
+
 st.markdown("## Why Choose HBL Reels Saver?")
 
 col1, col2 = st.columns(2)
