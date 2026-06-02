@@ -148,7 +148,6 @@ st.download_button(
     mime="video/mp4"
 )
 
-# Delete temporary file from server
 if os.path.exists(file_path):
     os.remove(file_path)
 
