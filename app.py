@@ -70,18 +70,7 @@ st.markdown("""
     <div class="logo-text">🔥 HBL Reels Saver</div>
     <div>Home | Features | About | Contact</div>
 </div>
-""", unsafe_allow_html=True)
-st.markdown("""
-<div class="hero">
-    <div class="hero-title">
-        Save Facebook & Instagram Reels
-    </div>
-
-    <div class="hero-subtitle">
-        Fast, secure and mobile-friendly downloads.
-    </div>
-</div>
-""", unsafe_allow_html=True)
+"""
 
 DOWNLOAD_FOLDER = "downloads"
 
