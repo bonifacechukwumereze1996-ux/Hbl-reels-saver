@@ -33,7 +33,7 @@ st.markdown("""
 }
 
 .logo-text {
-    font-size:20px;
+    font-size:15px;
     font-weight:bold;
     color:white;
 }
@@ -44,11 +44,11 @@ st.markdown("""
 # -----------------------------
 # HEADER
 # -----------------------------
-st.image("logo.png", width=80)
+st.image("logo.png", width=60)
 
 st.markdown("""
 <div class="navbar">
-    <div class="logo-text">🎞️ HBL Reels Saver</div>
+    <div class="logo-text">🎬 HBL Reels Saver</div>
     <div>Home | About |</div>
 </div>
 """, unsafe_allow_html=True)
