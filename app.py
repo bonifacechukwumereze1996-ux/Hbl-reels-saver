@@ -26,8 +26,8 @@ st.markdown("""
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:15px;
-    margin-bottom:20px;
+    padding:10px;
+    margin-bottom:15px;
     background:#161b22;
     border-radius:15px;
 }
