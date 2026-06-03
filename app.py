@@ -184,11 +184,9 @@ if st.session_state.step == 2:
 # FOOTER
 # -----------------------------
 st.markdown("""
-## Download Facebook & Instagram Reels
-
-Fast, simple and mobile-friendly reel downloader.
-
-Save videos directly to your phone in seconds.
+## Disclaimer
+HBL Reels Saver does not permanently store downloaded videos on its servers. Content is processed temporarily to facilitate downloads and is automatically removed afterward.
+Users are responsible for ensuring they have the right to download and use any content accessed through this service and must comply with applicable laws and platform terms.
 """)
 
 st.markdown("## Why Choose HBL Reels Saver?")
