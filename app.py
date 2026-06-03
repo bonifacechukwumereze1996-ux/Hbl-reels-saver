@@ -21,7 +21,6 @@ if os.path.exists(DOWNLOAD_FOLDER):
 # -----------------------------
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
 st.markdown("""
-""", unsafe_allow_html=True)
 <div style="
     background: linear-gradient(135deg, #0f1117, #1f2937);
     color: white;
