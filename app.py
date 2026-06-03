@@ -20,7 +20,23 @@ if os.path.exists(DOWNLOAD_FOLDER):
 # MUST BE FIRST STREAMLIT COMMAND
 # -----------------------------
 st.set_page_config(page_title="HBL Reels Saver (Fast Mode)", layout="centered")
-
+st.markdown("""
+<div style="
+    background: linear-gradient(135deg, #0f1117, #1f2937);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+">
+    <h1>⚡ HBL Reels Saver</h1>
+    <h3>Download Facebook & Instagram Reels in Seconds</h3>
+    <p>
+        Fast • Secure • Free <br>
+        Save your favorite reels with ease.
+    </p>
+</div>
+""", unsafe_allow_html=True)
 # -----------------------------
 # STYLES
 # -----------------------------
