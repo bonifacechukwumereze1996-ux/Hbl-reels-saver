@@ -24,6 +24,7 @@ st.markdown("""
 <marquee>
 🎬 Welcome to HBL Reels Saver | Fast Downloads | Secure Processing | No Login Required 🚀
 </marquee>
+st.image("logo.png", width=60)
 <div style="
     background: linear-gradient(135deg, #0f1117, #1f2937);
     color: white;
