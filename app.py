@@ -132,9 +132,8 @@ def fast_download(video_url):
 # -----------------------------
 if st.session_state.step == 1:
 
-    st.title("⚡ HBL Reels Saver (FAST MODE)")
-    st.write("Facebook & Instagram Reels Downloader")
-
+    st.title("🎬 HBL Reels Saver (ABOUT US)")
+    st.write("HBL Reels Saver is a simple and user-friendly tool designed to help users download Facebook and Instagram Reels quickly and easily.")
     url = st.text_input("📎 Paste Reel link")
 
     if st.button("Continue ➡️"):
