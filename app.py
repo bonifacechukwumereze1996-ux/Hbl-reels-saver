@@ -134,9 +134,9 @@ if st.session_state.step == 1:
 
     st.title("🎬 HBL Reels Saver (ABOUT US)")
     st.write("HBL Reels Saver is a simple and user-friendly tool designed to help users download Facebook and Instagram Reels quickly and easily.")
-    url = st.text_input("**📎 PASTE REELS HERE**")
+    url = st.text_input("***📎 PASTE REELS HERE***")
 
-    if st.button("Continue ➡️"):
+    if st.button("**CONTINUE ➡️**"):
 
         if not url:
             st.warning("Please paste a link")
