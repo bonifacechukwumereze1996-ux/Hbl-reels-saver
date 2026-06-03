@@ -194,3 +194,5 @@ with col4:
 
 st.markdown("---")
 st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
+st.markdown("### Support HBL Reels Saver ❤️")
+st.markdown("[Donate via Paystack](https://paystack.com/pay/yourlink)")
