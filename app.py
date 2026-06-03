@@ -3,6 +3,19 @@ import yt_dlp
 import os
 import time
 
+DOWNLOAD_FOLDER = "downloads"
+
+# Delete files older than 3 hours
+if os.path.exists(DOWNLOAD_FOLDER):
+    now = time.time()
+
+    for filename in os.listdir(DOWNLOAD_FOLDER):
+        file_path = os.path.join(DOWNLOAD_FOLDER, filename)
+
+        if os.path.isfile(file_path):
+            if now - os.path.getmtime(file_path) > 10800:  # 3 hours
+                os.remove(file_path)
+
 # -----------------------------
 # MUST BE FIRST STREAMLIT COMMAND
 # -----------------------------
