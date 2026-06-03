@@ -91,8 +91,7 @@ st.image("logo.png", width=60)
 
 st.markdown("""
 <div class="navbar">
-    <div class="logo-text">🎬 HBL Reels Saver</div>
-    <div>Home | About |</div>
+    <div class="logo-text">🎬 HBL Reels Saver</div> 
 </div>
 """, unsafe_allow_html=True)
 
