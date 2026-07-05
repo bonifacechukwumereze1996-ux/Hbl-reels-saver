@@ -199,5 +199,6 @@ with col4:
     st.success("🔒 Secure Processing")
 
 st.markdown("---")
+
 st.caption("© 2026 HBL Skill Global. All Rights Reserved.
 ")
