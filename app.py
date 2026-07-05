@@ -171,9 +171,13 @@ if st.session_state.step == 2:
 # FOOTER
 # -----------------------------
 st.markdown("""
-## Disclaimer
-HBL Reels Saver does not permanently store downloaded videos on its servers. Content is processed temporarily to facilitate downloads and is automatically removed afterward.
-Users are responsible for ensuring they have the right to download and use any content accessed through this service and must comply with applicable laws and platform terms.
+##About Us
+Welcome to HBL Reels Saver, a digital solution developed by HBL Skill Global.
+HBL Skill Global is committed to empowering individuals and businesses through fashion, digital innovation, and practical technology solutions. We believe that creativity grows when people have access to quality learning resources and design inspiration.
+HBL Reels Saver was created to help fashion designers, tailors, clothing brands, students, and fashion enthusiasts easily save publicly available reels from supported social media platforms for inspiration, learning, and personal reference.
+Our mission is to bridge the gap between fashion and technology by providing simple, reliable, and user-friendly tools that support creativity and productivity.
+
+Thank you for choosing HBL Reels Saver.
 """)
 
 st.markdown("## Why Choose HBL Reels Saver?")
@@ -195,6 +199,7 @@ with col4:
     st.success("🔒 Secure Processing")
 
 st.markdown("---")
-st.caption("© 2026 HBL Reels Saver | All Rights Reserved")
-st.markdown("### Support HBL Reels Saver ❤️")
+st.caption("© 2026 HBL Skill Global. All Rights Reserved.
+")
+st.markdown("### Empowering Fashion Through Digital Innovation.")
 st.markdown("[Donate via Paystack](https://paystack.com/pay/yourlink)")
