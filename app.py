@@ -171,7 +171,7 @@ if st.session_state.step == 2:
 # FOOTER
 # -----------------------------
 st.markdown("""
-##About Us
+About Us <br>
 Welcome to HBL Reels Saver, a digital solution developed by HBL Skill Global.
 HBL Skill Global is committed to empowering individuals and businesses through fashion, digital innovation, and practical technology solutions. We believe that creativity grows when people have access to quality learning resources and design inspiration.
 HBL Reels Saver was created to help fashion designers, tailors, clothing brands, students, and fashion enthusiasts easily save publicly available reels from supported social media platforms for inspiration, learning, and personal reference.
