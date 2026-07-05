@@ -32,7 +32,7 @@ st.markdown("""
     text-align: center;
     margin-bottom: 20px;
 ">
-    <h1>⚡Disclaimer </h1>
+    <h2>⚡Disclaimer </h2>
     <h3>Welcome to HBL Reels Saver.</h3>
     <p>
       This platform is designed to help fashion designers, clothing brands, tailors, students, and clients conveniently save publicly available fashion reels and clothing design inspiration from supported social media platforms for personal reference, learning, and creative inspiration.  <br>
