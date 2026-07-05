@@ -121,7 +121,7 @@ def fast_download(video_url):
 # -----------------------------
 if st.session_state.step == 1:
 
-    url = st.text_input("***📎 PASTE REELS HERE***")
+    url = st.text_input("***📎 (H3)PASTE REELS HERE(H3/)***")
 
     if st.button("**CONTINUE ➡️**"):
 
