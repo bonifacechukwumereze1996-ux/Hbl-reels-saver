@@ -200,5 +200,5 @@ with col4:
 
 st.markdown("---")
 
-st.caption("© 2026 HBL Skill Global. All Rights Reserved.
-")
+st.markdown("---")
+st.caption("© 2026 HBL Skill Global. All Rights Reserved.")
