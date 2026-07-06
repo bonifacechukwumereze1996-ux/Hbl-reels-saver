@@ -3,6 +3,21 @@ import yt_dlp
 import os
 import time
 st.image("HBL_logo.png", width=60)
+st.markdown("""
+<style>
+.stApp {
+    background-image: url("HBL_logo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+}
+
+/* Make all text black */
+html, body, [class*="css"] {
+    color: black;
+}
+</style>
+""", unsafe_allow_html=True)
 
 DOWNLOAD_FOLDER = "downloads"
 
