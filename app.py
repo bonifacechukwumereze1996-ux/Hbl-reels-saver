@@ -2,7 +2,7 @@ import streamlit as st
 import yt_dlp
 import os
 import time
-st.image("HBL_logo.png", width=180)
+st.image("HBL_logo.png", width=60)
 st.title("🎬 HBL Reels Saver")
 st.caption("Powered by HBL Skill Global")
 
